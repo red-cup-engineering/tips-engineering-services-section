@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "tips-services-section/book-tip-input",
+  "title": "bookTipInput",
+  "description": "scripts/book-tip.mjs's input: one verified tip receipt (verify-tip-receipt.mjs's `receipt` field).",
+  "$ref": "./tip-receipt.schema.json"
+}

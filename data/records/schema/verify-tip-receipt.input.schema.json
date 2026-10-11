@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "tips-services-section/verify-tip-receipt-input",
+  "title": "verifyTipReceiptInput",
+  "description": "The request scripts/verify-tip-receipt.mjs reads via stdin: an endpoint id from the tip-endpoint catalog and a rail-specific claim.",
+  "type": "object",
+  "required": ["endpointId", "claim"],
+  "additionalProperties": false,
+  "properties": {
+    "endpointId": { "type": "string", "minLength": 1, "description": "An id from data/records/2026-09-05-tip-endpoints.json." },
+    "claim": {
+      "type": "object",
+      "description": "Rail-specific: card takes {stripeEventId}; hive takes {amount, asset, memo, observedAt, transactionId?, block?, nodes?, expiresAt?, fixtureResponses?}; base-usdc takes {amount, txHash, rpcUrls?}."
+    }
+  }
+}

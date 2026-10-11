@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "tips-services-section/tip-endpoint",
+  "title": "TipEndpoint",
+  "description": "One rail through which the 561 Group can receive a tip: money sent because the sender wants to, with no offer, product, entitlement, or promise in return (2026-09-05 ruling, accept-tips-through-every-endpoint).",
+  "type": "object",
+  "required": ["id", "rail", "provider", "walletId", "state", "verificationOperation", "bookingAccount", "feeSchedule", "handsItem"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "minLength": 1, "description": "Stable slug identifying this endpoint." },
+    "rail": {
+      "type": "string",
+      "enum": ["card", "bank", "hive", "base-usdc", "lightning", "platform"],
+      "description": "The settlement rail this endpoint moves value over."
+    },
+    "provider": { "type": "string", "minLength": 1, "description": "The provider or venue operating this endpoint (e.g. \"Stripe Checkout\", \"Hive\", \"Ko-fi\")." },
+    "walletId": {
+      "type": ["string", "null"],
+      "pattern": "^(base|ethereum|hive|hive-engine):.+$",
+      "description": "A `\"<chain>:<address>\"` identity resolved through key-management-services-section's WalletRegistry (2026-09-05 ruling, payment-receivers-are-parameters-never-literals) -- never a literal receiver address/account/handle. `null` when this endpoint's rail carries no chain wallet (card, bank, lightning, platform) or no registry wallet has been named for it yet (state `\"needs-wallet\"`)."
+    },
+    "state": {
+      "type": "string",
+      "enum": ["live", "code-ready", "needs-account", "needs-wallet"],
+      "description": "\"live\": usable today with no further action. \"code-ready\": this section's code can verify/book a receipt on this rail but the endpoint is not yet reachable by a sender (e.g. a Stripe Payment Link not yet created). \"needs-account\": neither code nor a reachable account exists yet. \"needs-wallet\": this endpoint names no `walletId` because no matching registry wallet exists yet -- never invented, reported for a founder to name."
+    },
+    "verificationOperation": {
+      "type": ["string", "null"],
+      "description": "The script or package operation that confirms a receipt on this rail, or null when none exists yet."
+    },
+    "bookingAccount": { "type": "string", "minLength": 1, "pattern": "^[A-Za-z][A-Za-z0-9-]*(:[A-Za-z0-9-]+)*$", "description": "The Beancount income account this endpoint's receipts book to (e.g. \"Income:Tips:Stripe\")." },
+    "feeSchedule": {
+      "description": "The provider's own published fee, read from its first-party page, or the literal string \"unknown\" when no first-party figure could be found.",
+      "oneOf": [
+        { "const": "unknown" },
+        {
+          "type": "object",
+          "required": ["description", "url", "dateRead"],
+          "additionalProperties": false,
+          "properties": {
+            "description": { "type": "string", "minLength": 1, "description": "The fee, in the provider's own terms (percentage, fixed amount, or both)." },
+            "url": { "type": "string", "format": "uri", "description": "The first-party page the fee was read from." },
+            "dateRead": { "type": "string", "format": "date", "description": "The date this fee was read from the cited page." }
+          }
+        }
+      ]
+    },
+    "handsItem": {
+      "type": ["string", "null"],
+      "description": "What only the founder's own identity can do to open or arm this endpoint, or null when nothing further is required of the founder."
+    }
+  }
+}

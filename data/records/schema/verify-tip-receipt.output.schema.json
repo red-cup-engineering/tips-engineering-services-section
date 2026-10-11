@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "tips-services-section/verify-tip-receipt-output",
+  "title": "verifyTipReceiptOutput",
+  "description": "scripts/verify-tip-receipt.mjs's typed outcome: a verified tip receipt, or a refusal naming why. Never an exception for a domain-level mismatch.",
+  "oneOf": [
+    {
+      "type": "object",
+      "required": ["verified", "receipt"],
+      "additionalProperties": false,
+      "properties": {
+        "verified": { "const": true },
+        "receipt": {
+          "type": "object",
+          "required": ["rail", "provider", "receiver", "amount", "currency", "receiptId", "verifiedAt"],
+          "additionalProperties": false,
+          "properties": {
+            "rail": { "type": "string", "enum": ["card", "bank", "hive", "base-usdc", "lightning", "platform"] },
+            "provider": { "type": "string" },
+            "receiver": { "type": "string" },
+            "amount": { "type": ["string", "null"], "pattern": "^\\d+(\\.\\d+)?$" },
+            "currency": { "type": ["string", "null"] },
+            "feeAmount": { "type": "string", "pattern": "^\\d+(\\.\\d+)?$" },
+            "receiptId": { "type": "string" },
+            "verifiedAt": { "type": "string", "format": "date-time" }
+          }
+        }
+      }
+    },
+    {
+      "type": "object",
+      "required": ["verified", "reason"],
+      "additionalProperties": false,
+      "properties": {
+        "verified": { "const": false },
+        "reason": { "type": "string" },
+        "detail": {}
+      }
+    }
+  ]
+}

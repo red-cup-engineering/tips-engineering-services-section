@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "tips-services-section/book-tip-output",
+  "title": "bookTipOutput",
+  "description": "scripts/book-tip.mjs's output: the sidecar file written, the directive appended, and any new `open` directives.",
+  "type": "object",
+  "required": ["booked", "path", "directive", "accountsToOpen"],
+  "additionalProperties": false,
+  "properties": {
+    "booked": { "const": true },
+    "path": { "type": "string", "minLength": 1 },
+    "directive": { "type": "string", "minLength": 1 },
+    "accountsToOpen": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["account", "date", "directive"],
+        "additionalProperties": false,
+        "properties": {
+          "account": { "type": "string" },
+          "date": { "type": "string", "format": "date" },
+          "directive": { "type": "string" }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,202 @@
+{
+  "$schema": "./schema/tip-endpoint.schema.json",
+  "type": "TipEndpointSet",
+  "recordedAt": "2026-09-05",
+  "ruling": "561-group-services-section/data/records/2026-09-05-ruling-accept-tips-through-every-endpoint.json",
+  "endpoints": [
+    {
+      "id": "stripe-checkout-custom-amount",
+      "rail": "card",
+      "provider": "Stripe Checkout",
+      "walletId": null,
+      "state": "code-ready",
+      "verificationOperation": "stripe-services-section ingestWebhook (checkout.session.completed) + tips-services-section scripts/verify-tip-receipt.mjs (card rail)",
+      "bookingAccount": "Income:Tips:Stripe",
+      "feeSchedule": {
+        "description": "2.9% + $0.30 per successful domestic US card transaction; +1.5% for international cards; +1% when currency conversion is required.",
+        "url": "https://stripe.com/pricing",
+        "dateRead": "2026-09-05"
+      },
+      "handsItem": "Arm live Stripe credentials (the owner's Stripe fence is on product quality, not tips; a tip carries no product so this lot leaves the offering status test-only pending that arming) and flip the tip offering's status to \"live\" in stripe-services-section/content/config/offerings.json once armed."
+    },
+    {
+      "id": "stripe-payment-link-custom-amount",
+      "rail": "card",
+      "provider": "Stripe Payment Link (customer chooses what to pay)",
+      "walletId": null,
+      "state": "needs-account",
+      "verificationOperation": "stripe-services-section ingestWebhook (checkout.session.completed) + tips-services-section scripts/verify-tip-receipt.mjs (card rail), once the link exists",
+      "bookingAccount": "Income:Tips:Stripe",
+      "feeSchedule": {
+        "description": "2.9% + $0.30 per successful domestic US card transaction; +1.5% for international cards; +1% when currency conversion is required.",
+        "url": "https://stripe.com/pricing",
+        "dateRead": "2026-09-05"
+      },
+      "handsItem": "Create a Stripe Payment Link with \"Customer chooses price\" enabled (Dashboard: More pricing options > One-off > Customer chooses price, or the Prices API's custom_unit_amount) under the founder's live Stripe account."
+    },
+    {
+      "id": "hive-hbd-transfer",
+      "rail": "hive",
+      "provider": "Hive (HBD transfer with memo)",
+      "walletId": "hive:emsenn0",
+      "state": "live",
+      "verificationOperation": "verify-hbd-payment-service verifyHbdPayment, via tips-services-section scripts/verify-tip-receipt.mjs (hive rail)",
+      "bookingAccount": "Income:Tips:Hive",
+      "feeSchedule": "unknown",
+      "handsItem": null
+    },
+    {
+      "id": "hive-hive-transfer",
+      "rail": "hive",
+      "provider": "Hive (HIVE transfer with memo)",
+      "walletId": "hive:emsenn0",
+      "state": "live",
+      "verificationOperation": "verify-hbd-payment-service verifyHbdPayment, via tips-services-section scripts/verify-tip-receipt.mjs (hive rail)",
+      "bookingAccount": "Income:Tips:Hive",
+      "feeSchedule": "unknown",
+      "handsItem": null
+    },
+    {
+      "id": "base-usdc-transfer",
+      "rail": "base-usdc",
+      "provider": "Base (USDC transfer)",
+      "walletId": "base:0x224C08A8526751887a83e2711B167f890c6D078d",
+      "state": "live",
+      "verificationOperation": "tips-services-section scripts/verify-tip-receipt.mjs (base-usdc rail, two independent Base public RPC endpoints)",
+      "bookingAccount": "Income:Tips:Base-USDC",
+      "feeSchedule": {
+        "description": "No separate platform fee; the sender pays Base network gas (L2 execution + L1 security fee) in ETH. Base mainnet's minimum base fee is 5,000,000 wei (0.005 gwei), giving roughly $0.002 for a typical 200,000-gas transfer at $2,000 ETH.",
+        "url": "https://docs.base.org/base-chain/network-information/network-fees",
+        "dateRead": "2026-09-05"
+      },
+      "handsItem": null
+    },
+    {
+      "id": "lightning-zbd",
+      "rail": "lightning",
+      "provider": "Lightning Network via ZBD",
+      "walletId": null,
+      "state": "needs-account",
+      "verificationOperation": null,
+      "bookingAccount": "Income:Tips:Lightning",
+      "feeSchedule": {
+        "description": "ZBD's own documentation reports Lightning payment fees typically under $0.01, with a worked example of a $0.003 fee settling a roughly $500 payment.",
+        "url": "https://docs.zbdpay.com/payments/lightning-network",
+        "dateRead": "2026-09-05"
+      },
+      "handsItem": "Create a ZBD (or other LNURL-capable Lightning) merchant account under the founder's identity and wire its receiving address/LNURL into this section's config; energy-bank's ZBD/Lightning settlement stub (computer-game-system-services-section/services/energy-bank) is the nearest existing Lightning code but is scoped to game settlement, not a public tip endpoint, and is out of this lot's authority to touch."
+    },
+    {
+      "id": "ko-fi",
+      "rail": "platform",
+      "provider": "Ko-fi",
+      "walletId": null,
+      "state": "needs-account",
+      "verificationOperation": null,
+      "bookingAccount": "Income:Tips:Ko-fi",
+      "feeSchedule": "unknown",
+      "handsItem": "The handle \"emsenn\" appears at https://ko-fi.com/emsenn in 2026-06-17 site residue (public-services-section emsenn.net support.md); this lot was told not to treat that as current. Confirm the account is still active and owned by the founder (or open a fresh one) before listing it as live."
+    },
+    {
+      "id": "buy-me-a-coffee",
+      "rail": "platform",
+      "provider": "Buy Me a Coffee",
+      "walletId": null,
+      "state": "needs-account",
+      "verificationOperation": null,
+      "bookingAccount": "Income:Tips:Buy-Me-A-Coffee",
+      "feeSchedule": {
+        "description": "5% platform fee per transaction (creator keeps 95%); Stripe payment processing adds 2.9% + $0.30 per transaction, plus 0.5% for payout processing, +1% for international transactions, +0.5% for subscription payments.",
+        "url": "https://help.buymeacoffee.com/en/articles/8105744-how-to-calculate-charges-on-your-payment",
+        "dateRead": "2026-09-05"
+      },
+      "handsItem": "Create a Buy Me a Coffee creator account under the founder's identity."
+    },
+    {
+      "id": "github-sponsors",
+      "rail": "platform",
+      "provider": "GitHub Sponsors",
+      "walletId": null,
+      "state": "needs-account",
+      "verificationOperation": null,
+      "bookingAccount": "Income:Tips:GitHub-Sponsors",
+      "feeSchedule": {
+        "description": "0% fee for sponsorships from personal accounts (100% passed through); up to 6% for sponsorships from organization accounts (3% credit-card processing + 3% GitHub service fee), reducible by switching the sponsoring organization to invoiced billing.",
+        "url": "https://docs.github.com/en/sponsors/getting-started-with-github-sponsors/about-github-sponsors",
+        "dateRead": "2026-09-05"
+      },
+      "handsItem": "Enroll a GitHub account or organization (561-group / lenticule-science, already existing per the public-release gate note) in GitHub Sponsors as a sponsored party; this is an account-enrollment action tied to the founder's or org's GitHub identity."
+    },
+    {
+      "id": "liberapay",
+      "rail": "platform",
+      "provider": "Liberapay",
+      "walletId": null,
+      "state": "needs-account",
+      "verificationOperation": null,
+      "bookingAccount": "Income:Tips:Liberapay",
+      "feeSchedule": {
+        "description": "0% platform fee (Liberapay takes no cut of payments); payment-processor fees apply separately and averaged about 3% via Stripe and 5.1% via PayPal over the last year.",
+        "url": "https://liberapay.com/about/faq",
+        "dateRead": "2026-09-05"
+      },
+      "handsItem": "The handle \"emsenn\" appears at https://liberapay.com/emsenn/donate in 2026-06-17 site residue; this lot was told not to treat that as current. Confirm the account is still active and owned by the founder (or open a fresh one) before listing it as live."
+    },
+    {
+      "id": "open-collective",
+      "rail": "platform",
+      "provider": "Open Collective",
+      "walletId": null,
+      "state": "needs-account",
+      "verificationOperation": null,
+      "bookingAccount": "Income:Tips:Open-Collective",
+      "feeSchedule": {
+        "description": "A host fee set by the collective's chosen fiscal host, commonly in the 0%-10% range; the specific percentage for any one fiscal host is not itemized on this page and depends on which host is chosen.",
+        "url": "https://docs.opencollective.com/help/about/pricing",
+        "dateRead": "2026-09-05"
+      },
+      "handsItem": "Create an Open Collective and choose a fiscal host under the founder's or org's identity."
+    },
+    {
+      "id": "paypal-me",
+      "rail": "platform",
+      "provider": "PayPal.Me",
+      "walletId": null,
+      "state": "needs-account",
+      "verificationOperation": null,
+      "bookingAccount": "Income:Tips:PayPal",
+      "feeSchedule": {
+        "description": "Domestic US personal (friends & family) payment funded by a bank account or PayPal balance: no fee. The same payment funded by a credit or debit card: 2.90% + $0.30.",
+        "url": "https://www.paypal.com/us/webapps/mpp/paypal-fees",
+        "dateRead": "2026-09-05"
+      },
+      "handsItem": "The handle \"emsenn\" appears at https://paypal.me/emsenn in 2026-06-17 site residue; this lot was told not to treat that as current. Confirm the account is still active and owned by the founder (or open a fresh one) before listing it as live."
+    },
+    {
+      "id": "venmo",
+      "rail": "platform",
+      "provider": "Venmo",
+      "walletId": null,
+      "state": "needs-account",
+      "verificationOperation": null,
+      "bookingAccount": "Income:Tips:Venmo",
+      "feeSchedule": {
+        "description": "Receiving a standard Venmo payment is free. Only the receiver's own instant transfer of their balance to a bank/debit card carries a fee: 1.75% (minimum $0.25, maximum $25) versus a free standard transfer that takes 1-3 business days.",
+        "url": "https://help.venmo.com/cs/articles/instant-bank-transfer-faq-vhel302",
+        "dateRead": "2026-09-05"
+      },
+      "handsItem": "Create a Venmo account under the founder's identity (Venmo is US-only and requires a linked US bank account or debit card)."
+    },
+    {
+      "id": "cash-app",
+      "rail": "platform",
+      "provider": "Cash App",
+      "walletId": null,
+      "state": "needs-account",
+      "verificationOperation": null,
+      "bookingAccount": "Income:Tips:Cash-App",
+      "feeSchedule": "unknown",
+      "handsItem": "Create a Cash App account under the founder's identity."
+    }
+  ]
+}
