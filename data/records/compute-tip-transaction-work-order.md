@@ -2,8 +2,8 @@
 ## Requirements
 - `balanced-tip-transaction`: The operation must derive one balanced Beancount transaction directive (and any `open` directives for accounts not already open) from one verified tip receipt, debiting the rail's asset account (and an `Expenses:Fees:<Provider>` account when the receipt carries a fee) and crediting `Income:Tips:<Provider>` for the gross amount, in the receipt's currency, using exact-decimal string arithmetic never floating point.
 ## Prohibitions
-- `refuses-non-positive-amount`: The operation must throw rather than derive a transaction when the receipt's amount is not a positive decimal string.
-- `refuses-fee-exceeding-amount`: The operation must throw rather than derive an unbalanced transaction when a receipt's fee amount is greater than or equal to its gross amount.
+- `refuses-non-positive-amount`: The operation must throw rather than derive a transaction when the receipt's amount is not a positive decimal string. [claims: a-tip-is-a-positive-amount]
+- `refuses-fee-exceeding-amount`: The operation must throw rather than derive an unbalanced transaction when a receipt's fee amount is greater than or equal to its gross amount. [claims: fee-below-gross-keeps-the-books-balanced]
 ## Laws
 - `exact-decimal-arithmetic-law` | computer-ledger-system-services-section decimal.mjs (`@red-cup-engineering/computer-ledger-system-services-section@0.4.2`) | 2026-09-05 | lib/emsenn/services/561-group/services/engineering-services-section/services/computer-engineering-services-section/services/computer-systems-engineering-services-section/services/computer-ledger-system-services-section/src/decimal.mjs | Applies to every amount computed or compared by this operation. | `addDecimalStrings`/`parseDecimal`/`formatScaled` are BigInt-scaled decimal-string arithmetic; a balance or price is never a JavaScript `Number`.
 - `pure-data-transformation-law` | The language law (asserted 2026-08-30) | v1 | .claude/rules/org-layering.md | Applies to computeTipTransaction as receipt-to-directive transformation, never filesystem or network I/O. | A function computing a ledger directive from a receipt performs no I/O of its own; effects (writing the sidecar file, recording a receipt) are a caller's concern.
@@ -11,6 +11,10 @@
 - `node-esm-operation` | Node.js | v24.2.0+ | https://nodejs.org/docs/v24/api/esm.html | Applies to the .mjs operation and its import.meta.main guard. | The package uses one executable ESM operation source file eligible for downstream staged package-birth assays.
 ## Open questions
 none
+## Claims
+- `dep-computer-ledger-system-services-section` | measured | dependency | @red-cup-engineering/computer-ledger-system-services-section@0.4.2 is published on the Group registry | none | data/records/2026-10-19-work-order-evidence/npm-view-red-cup-engineering-computer-ledger-system-services-section-0-4-2.json | sha256:7d79213a974e745c863154dc6437d7b2dbf19790900ae21373dd3dd625a3ecca | npm view of @red-cup-engineering/computer-ledger-system-services-section@0.4.2 returned its name, version and integrity (2026-10-19)
+- `a-tip-is-a-positive-amount` | derived | world | A tip receipt's gross amount is a positive decimal string, since it credits income | none | requirement:balanced-tip-transaction; constraint:exact-decimal-arithmetic-law | The requirement credits income for the gross amount and the law fixes amounts as decimal strings, so a zero or negative amount is no tip
+- `fee-below-gross-keeps-the-books-balanced` | derived | world | A fee at or above the gross amount cannot be debited without leaving the transaction unbalanced or the asset non-positive | none | requirement:balanced-tip-transaction | The asset is debited the gross less the fee and the fee separately, so the debits equal the credit only when the fee is below the gross amount
 ## Package
 ```json
 {"packageName":"@red-cup-engineering/scratch-compute-tip-transaction-20260905-service","packageVersion":"0.1.0","license":"UNLICENSED","dependencies":{"@red-cup-engineering/computer-ledger-system-services-section":"0.4.2"},"devDependencies":{}}
