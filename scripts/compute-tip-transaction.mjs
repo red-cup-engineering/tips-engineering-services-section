@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { addDecimalStrings, compareDecimalStrings, negateDecimalString } from "@red-cup-engineering/computer-data-engineering-services-section/number/decimal-string";
 import { toAccountComponent } from "../src/tips.mjs";
-import { runJavascriptNodeOperation } from "@red-cup-engineering/javascript-node-services-section/operation";
+import { runJavascriptNodeOperation } from "@red-cup-engineering/javascript-node-operation-engineering-services-section/operation";
 
 const RAIL_ASSET_ACCOUNTS = {
   card: "Assets:Cash:Operating",

@@ -27,12 +27,12 @@
     "@red-cup-engineering/metrologic": "workspace:*",
     "@red-cup-engineering/semiotic-eavt-services-section": "workspace:*",
     "@red-cup-engineering/computer-data-engineering-services-section": "workspace:*",
-    "@red-cup-engineering/javascript-node-services-section": "workspace:*",
     "@red-cup-engineering/json-schema-services-section": "workspace:*",
     "@red-cup-engineering/key-management-services-section": "workspace:*",
     "@red-cup-engineering/stripe-services-section": "workspace:*",
     "@red-cup-engineering/witness-journal-document-service": "workspace:*",
-    "@red-cup-engineering/x402-services-section": "workspace:*"
+    "@red-cup-engineering/x402-services-section": "workspace:*",
+    "@red-cup-engineering/javascript-node-operation-engineering-services-section": "0.2.0"
   },
   "devDependencies": {
     "@red-cup-engineering/computer-system-engine": "workspace:*"

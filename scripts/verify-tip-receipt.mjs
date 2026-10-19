@@ -14,7 +14,7 @@ import { createRequire } from "node:module";
 import { dirname, join } from "node:path";
 import { verifyHbdPayment } from "@red-cup-engineering/x402-services-section/hbd/verify-payment";
 import { findEndpoint, loadEndpoints } from "../src/tips.mjs";
-import { runJavascriptNodeOperation } from "@red-cup-engineering/javascript-node-services-section/operation";
+import { runJavascriptNodeOperation } from "@red-cup-engineering/javascript-node-operation-engineering-services-section/operation";
 
 const require = createRequire(import.meta.url);
 
