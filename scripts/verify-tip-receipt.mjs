@@ -53,7 +53,7 @@ async function verifyCardClaim(endpoint, claim, options) {
   if (typeof claim?.stripeEventId !== "string" || claim.stripeEventId.length === 0) {
     return refuse("invalid-claim", "claim.stripeEventId is required for the card rail");
   }
-  const { createSemanticRecordJournal } = await import("@red-cup-engineering/semiotic-eavt-services-section/record-semantic-record");
+  const { createSemanticRecordJournal } = await import("@red-cup-engineering/semantic-record-journal-service");
   const journal = options.stripeJournal
     ?? createSemanticRecordJournal({ root: options.stripeJournalRoot ?? stripePackageRoot(), objectKind: "stripe.payment-service-record" });
   const rows = await journal.query({ category: "stripe-webhook-event-admission.events" });
