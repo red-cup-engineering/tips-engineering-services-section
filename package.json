@@ -24,18 +24,13 @@
     "tips-cli": "apps/tips-cli.mjs"
   },
   "dependencies": {
-    "@red-cup-engineering/metrologic": "workspace:*",
-    "@red-cup-engineering/semiotic-eavt-services-section": "workspace:*",
-    "@red-cup-engineering/computer-data-engineering-services-section": "workspace:*",
-    "@red-cup-engineering/javascript-node-services-section": "workspace:*",
-    "@red-cup-engineering/json-schema-services-section": "workspace:*",
-    "@red-cup-engineering/key-management-services-section": "workspace:*",
-    "@red-cup-engineering/stripe-services-section": "workspace:*",
-    "@red-cup-engineering/witness-journal-document-service": "workspace:*",
-    "@red-cup-engineering/x402-services-section": "workspace:*"
-  },
-  "devDependencies": {
-    "@red-cup-engineering/computer-system-engine": "workspace:*"
+    "@red-cup-engineering/computer-data-engineering-services-section": "0.7.1",
+    "@red-cup-engineering/json-schema-services-section": "0.5.0",
+    "@red-cup-engineering/key-management-services-section": "0.5.5",
+    "@red-cup-engineering/stripe-services-section": "0.1.12",
+    "@red-cup-engineering/x402-services-section": "0.13.6",
+    "@red-cup-engineering/javascript-node-operation-engineering-services-section": "0.2.0",
+    "@red-cup-engineering/semantic-record-journal-service": "0.1.11"
   },
   "engines": {
     "node": ">=24.2.0"

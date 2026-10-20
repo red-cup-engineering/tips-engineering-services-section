@@ -14,6 +14,25 @@ function memoryJournal() {
   };
 }
 
+test("existing journal survives reopening and duplicate receipts project once", async () => {
+  const { createSemanticRecordJournal } = await import("@red-cup-engineering/semantic-record-journal-service");
+  const dir = mkdtempSync(join(tmpdir(), "tips-reopen-"));
+  const options = { root: dir, objectKind: "tips.payment-service-record" };
+  const receipt = { rail: "card", provider: "fixture", receiver: "fixture", amount: "5.00", currency: "USD", receiptId: "fixture-reopen", verifiedAt: "2026-09-05T12:00:00Z" };
+  const sidecarPath = join(dir, "tips.beancount");
+  try {
+    bookTip(receipt, { sidecarPath, journal: createSemanticRecordJournal(options), now: new Date("2026-09-05T12:00:01Z") });
+    rmSync(sidecarPath);
+    const reopened = createSemanticRecordJournal(options);
+    bookTip(receipt, { sidecarPath, journal: reopened, now: new Date("2026-09-05T12:00:02Z") });
+    assert.equal((readFileSync(sidecarPath, "utf8").match(/receipt_id: "fixture-reopen"/gu) ?? []).length, 1);
+    assert.ok(reopened.claims().some(row => row.a === "charge:support"));
+    assert.equal(reopened.claims().some(row => row.a === "charge:refutation"), false);
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
+
 test("books a tip as a headed, balanced sidecar and records a journal receipt", () => {
   const dir = mkdtempSync(join(tmpdir(), "tips-book-"));
   const journal = memoryJournal();
@@ -72,7 +91,7 @@ test("never re-opens an account a knownOpenPaths file (e.g. the main ledger) alr
 });
 
 test("the sidecar is a projection of the journal: rebuilt whole, each receipt once", async () => {
-  const { createSemanticRecordJournal } = await import("@red-cup-engineering/semiotic-eavt-services-section/record-semantic-record");
+  const { createSemanticRecordJournal } = await import("@red-cup-engineering/semantic-record-journal-service");
   const dir = mkdtempSync(join(tmpdir(), "tips-book-"));
   const path = join(dir, "2026-09-05-tip-transactions.beancount");
   try {

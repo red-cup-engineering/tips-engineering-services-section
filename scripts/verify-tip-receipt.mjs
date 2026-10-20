@@ -14,7 +14,7 @@ import { createRequire } from "node:module";
 import { dirname, join } from "node:path";
 import { verifyHbdPayment } from "@red-cup-engineering/x402-services-section/hbd/verify-payment";
 import { findEndpoint, loadEndpoints } from "../src/tips.mjs";
-import { runJavascriptNodeOperation } from "@red-cup-engineering/javascript-node-services-section/operation";
+import { runJavascriptNodeOperation } from "@red-cup-engineering/javascript-node-operation-engineering-services-section/operation";
 
 const require = createRequire(import.meta.url);
 
@@ -53,7 +53,7 @@ async function verifyCardClaim(endpoint, claim, options) {
   if (typeof claim?.stripeEventId !== "string" || claim.stripeEventId.length === 0) {
     return refuse("invalid-claim", "claim.stripeEventId is required for the card rail");
   }
-  const { createSemanticRecordJournal } = await import("@red-cup-engineering/semiotic-eavt-services-section/record-semantic-record");
+  const { createSemanticRecordJournal } = await import("@red-cup-engineering/semantic-record-journal-service");
   const journal = options.stripeJournal
     ?? createSemanticRecordJournal({ root: options.stripeJournalRoot ?? stripePackageRoot(), objectKind: "stripe.payment-service-record" });
   const rows = await journal.query({ category: "stripe-webhook-event-admission.events" });

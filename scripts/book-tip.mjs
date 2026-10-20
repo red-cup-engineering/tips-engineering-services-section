@@ -12,7 +12,7 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { parseArgs } from "node:util";
-import { createSemanticRecordJournal } from "@red-cup-engineering/semiotic-eavt-services-section/record-semantic-record";
+import { createSemanticRecordJournal } from "@red-cup-engineering/semantic-record-journal-service";
 import { packageRoot } from "../src/tips.mjs";
 import { computeTipTransaction } from "./compute-tip-transaction.mjs";
 
@@ -81,7 +81,7 @@ export function bookTip(receipt, options = {}) {
     category: TIP_BOOKING_CATEGORY,
     recordedAt: (options.now ?? new Date()).toISOString(),
     record: { receiptId: receipt.receiptId, rail: receipt.rail, provider: receipt.provider, amount: receipt.amount, currency: receipt.currency, sidecarPath, directive, receipt },
-    told: { for: true, against: false },
+    charge: { support: true, refutation: false },
   });
 
   const bookings = journal.query({ category: TIP_BOOKING_CATEGORY }).map((row) => row.record);
