@@ -1,6 +1,6 @@
 {
   "name": "@red-cup-engineering/tips-services-section",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "type": "module",
   "description": "Tips through as many endpoints as possible (2026-09-05 ruling, accept-tips-through-every-endpoint): a catalog of tip endpoints across card, hive, base-usdc, lightning, and platform rails, each naming a walletId resolved through key-management-services-section's WalletRegistry rather than a literal receiver (2026-09-05 ruling, payment-receivers-are-parameters-never-literals); verification of a claimed receipt; and booking a verified tip as a balanced Beancount transaction.",
   "repository": {
