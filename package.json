@@ -45,5 +45,9 @@
     "data/records/compute-tip-transaction-work-order.md",
     "README.md"
   ],
-  "license": "UNLICENSED"
+  "license": "MIT",
+  "funding": {
+    "type": "individual",
+    "url": "https://github.com/561-group/.github/blob/main/TIPS.md"
+  }
 }
