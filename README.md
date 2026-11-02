@@ -1,4 +1,4 @@
-# tips-services-section
+# @red-cup-engineering/tips-engineering-services-section
 
 <!-- 561-group-standards:badges:start -->
 [![Red Cup Engineering](https://img.shields.io/badge/561%20Group-Red%20Cup%20Engineering-c0392b)](https://github.com/red-cup-engineering)
@@ -6,6 +6,8 @@
 [![Indigenous data: CARE](https://img.shields.io/badge/Indigenous%20data-CARE-4b6f44)](https://github.com/red-cup-engineering/.github/blob/main/GOVERNANCE.md)
 [![Tips welcome](https://img.shields.io/badge/tips-welcome-d4a017)](https://github.com/561-group/.github/blob/main/TIPS.md)
 <!-- 561-group-standards:badges:end -->
+
+Tips through as many endpoints as possible (2026-09-05 ruling, accept-tips-through-every-endpoint): a catalog of tip endpoints across card, hive, base-usdc, lightning, and platform rails, each naming a walletId resolved through key-management-services-section's WalletRegistry rather than a literal receiver (2026-09-05 ruling, payment-receivers-are-parameters-never-literals); verification of a claimed receipt; and booking a verified tip as a balanced Beancount transaction.
 
 Tips should be accepted through as many endpoints as possible. They are the passive counterpart to automatic billing for simple services. A tip is money sent because the sender wants to give it, with no offer, product, entitlement, or promise in return.
 
