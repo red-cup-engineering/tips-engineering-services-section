@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { addDecimalStrings, compareDecimalStrings, negateDecimalString } from "@red-cup-engineering/computer-data-engineering-services-section/number/decimal-string";
+import { addDecimalStrings, compareDecimalStrings, negateDecimalString } from "@red-cup-engineering/exact-number-data-service/decimal-string";
 import { toAccountComponent } from "../src/tips.mjs";
 import { runJavascriptNodeOperation } from "@red-cup-engineering/node-js-function-engineering-services-section/operation";
 

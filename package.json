@@ -24,6 +24,7 @@
     "tips-cli": "apps/tips-cli.mjs"
   },
   "dependencies": {
+    "@red-cup-engineering/exact-number-data-service": "^0.2.3",
     "@red-cup-engineering/computer-data-engineering-services-section": "0.7.1",
     "@red-cup-engineering/json-schema-services-section": "0.5.0",
     "@red-cup-engineering/key-management-services-section": "0.5.5",
