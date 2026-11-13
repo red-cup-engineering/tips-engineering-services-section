@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "tips-services-section/book-tip-output",
+  "$id": "tips-engineering-services-section/book-tip-output",
   "title": "bookTipOutput",
   "description": "scripts/book-tip.mjs's output: the sidecar file written, the directive appended, and any new `open` directives.",
   "type": "object",

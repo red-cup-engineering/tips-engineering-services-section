@@ -10,7 +10,7 @@
       "provider": "Stripe Checkout",
       "walletId": null,
       "state": "code-ready",
-      "verificationOperation": "stripe-services-section ingestWebhook (checkout.session.completed) + tips-services-section scripts/verify-tip-receipt.mjs (card rail)",
+      "verificationOperation": "stripe-services-section ingestWebhook (checkout.session.completed) + tips-engineering-services-section scripts/verify-tip-receipt.mjs (card rail)",
       "bookingAccount": "Income:Tips:Stripe",
       "feeSchedule": {
         "description": "2.9% + $0.30 per successful domestic US card transaction; +1.5% for international cards; +1% when currency conversion is required.",
@@ -25,7 +25,7 @@
       "provider": "Stripe Payment Link (customer chooses what to pay)",
       "walletId": null,
       "state": "needs-account",
-      "verificationOperation": "stripe-services-section ingestWebhook (checkout.session.completed) + tips-services-section scripts/verify-tip-receipt.mjs (card rail), once the link exists",
+      "verificationOperation": "stripe-services-section ingestWebhook (checkout.session.completed) + tips-engineering-services-section scripts/verify-tip-receipt.mjs (card rail), once the link exists",
       "bookingAccount": "Income:Tips:Stripe",
       "feeSchedule": {
         "description": "2.9% + $0.30 per successful domestic US card transaction; +1.5% for international cards; +1% when currency conversion is required.",
@@ -40,7 +40,7 @@
       "provider": "Hive (HBD transfer with memo)",
       "walletId": "hive:emsenn0",
       "state": "live",
-      "verificationOperation": "verify-hbd-payment-service verifyHbdPayment, via tips-services-section scripts/verify-tip-receipt.mjs (hive rail)",
+      "verificationOperation": "verify-hbd-payment-service verifyHbdPayment, via tips-engineering-services-section scripts/verify-tip-receipt.mjs (hive rail)",
       "bookingAccount": "Income:Tips:Hive",
       "feeSchedule": "unknown",
       "handsItem": null
@@ -51,7 +51,7 @@
       "provider": "Hive (HIVE transfer with memo)",
       "walletId": "hive:emsenn0",
       "state": "live",
-      "verificationOperation": "verify-hbd-payment-service verifyHbdPayment, via tips-services-section scripts/verify-tip-receipt.mjs (hive rail)",
+      "verificationOperation": "verify-hbd-payment-service verifyHbdPayment, via tips-engineering-services-section scripts/verify-tip-receipt.mjs (hive rail)",
       "bookingAccount": "Income:Tips:Hive",
       "feeSchedule": "unknown",
       "handsItem": null
@@ -62,7 +62,7 @@
       "provider": "Base (USDC transfer)",
       "walletId": "base:0x224C08A8526751887a83e2711B167f890c6D078d",
       "state": "live",
-      "verificationOperation": "tips-services-section scripts/verify-tip-receipt.mjs (base-usdc rail, two independent Base public RPC endpoints)",
+      "verificationOperation": "tips-engineering-services-section scripts/verify-tip-receipt.mjs (base-usdc rail, two independent Base public RPC endpoints)",
       "bookingAccount": "Income:Tips:Base-USDC",
       "feeSchedule": {
         "description": "No separate platform fee; the sender pays Base network gas (L2 execution + L1 security fee) in ETH. Base mainnet's minimum base fee is 5,000,000 wei (0.005 gwei), giving roughly $0.002 for a typical 200,000-gas transfer at $2,000 ETH.",

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "tips-services-section/tip-endpoint",
+  "$id": "tips-engineering-services-section/tip-endpoint",
   "title": "TipEndpoint",
   "description": "One rail through which the 561 Group can receive a tip: money sent because the sender wants to, with no offer, product, entitlement, or promise in return (2026-09-05 ruling, accept-tips-through-every-endpoint).",
   "type": "object",

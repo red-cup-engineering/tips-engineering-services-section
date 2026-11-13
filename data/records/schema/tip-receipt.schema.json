@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "tips-services-section/tip-receipt",
+  "$id": "tips-engineering-services-section/tip-receipt",
   "title": "TipReceipt",
   "description": "One verified tip: verify-tip-receipt.mjs's `receipt` field, and book-tip.mjs's input.",
   "type": "object",

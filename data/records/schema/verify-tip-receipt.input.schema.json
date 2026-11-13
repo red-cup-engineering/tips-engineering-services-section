@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "tips-services-section/verify-tip-receipt-input",
+  "$id": "tips-engineering-services-section/verify-tip-receipt-input",
   "title": "verifyTipReceiptInput",
   "description": "The request scripts/verify-tip-receipt.mjs reads via stdin: an endpoint id from the tip-endpoint catalog and a rail-specific claim.",
   "type": "object",

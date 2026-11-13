@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "tips-services-section/verify-tip-receipt-output",
+  "$id": "tips-engineering-services-section/verify-tip-receipt-output",
   "title": "verifyTipReceiptOutput",
   "description": "scripts/verify-tip-receipt.mjs's typed outcome: a verified tip receipt, or a refusal naming why. Never an exception for a domain-level mismatch.",
   "oneOf": [

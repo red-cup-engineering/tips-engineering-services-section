@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * The composed tips-services-section CLI: verify a claimed tip, book a verified one, or derive
+ * The composed tips-engineering-services-section CLI: verify a claimed tip, book a verified one, or derive
  * the public tips page, over one subcommand argument (`verify` | `book` | `page`), reading its
  * request as JSON from stdin (`page` takes none).
  */
