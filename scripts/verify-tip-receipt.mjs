@@ -41,12 +41,12 @@ function addressFromWalletId(walletId) {
 }
 
 /**
- * Locates the installed `@red-cup-engineering/stripe-services-section` package directory via
+ * Locates the installed `@red-cup-engineering/stripe-engineering-services-section` package directory via
  * Node's own module resolution, so this cross-package read never hand-writes a relative path.
  * @returns {string}
  */
 function stripePackageRoot() {
-  return dirname(require.resolve("@red-cup-engineering/stripe-services-section/package.json"));
+  return dirname(require.resolve("@red-cup-engineering/stripe-engineering-services-section/package.json"));
 }
 
 async function verifyCardClaim(endpoint, claim, options) {

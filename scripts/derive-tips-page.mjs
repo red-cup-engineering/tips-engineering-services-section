@@ -13,12 +13,12 @@
  */
 import { createRequire } from "node:module";
 import { readFileSync } from "node:fs";
-import { resolvePaymentReceiver } from "@red-cup-engineering/key-management-services-section/resolve-payment-receiver";
+import { resolvePaymentReceiver } from "@red-cup-engineering/key-management-computer-blockchain-system-engineering-services-section/resolve-payment-receiver";
 import {
   verifyEnvOnHost, verifyLocalEnvVariable, verifyLocalKeystoreFile, verifyRemoteKeystoreFileExistence, verifyWalletCustody,
-} from "@red-cup-engineering/key-management-services-section/verify-set-of-wallet-custody";
-import { findEnvFilesToScan, findRepoRoot, readEnvVariablesFromFiles } from "@red-cup-engineering/key-management-services-section/derive-set-of-wallets";
-import { configRoot } from "@red-cup-engineering/key-management-services-section/keystore-paths";
+} from "@red-cup-engineering/key-management-computer-blockchain-system-engineering-services-section/verify-set-of-wallet-custody";
+import { findEnvFilesToScan, findRepoRoot, readEnvVariablesFromFiles } from "@red-cup-engineering/key-management-computer-blockchain-system-engineering-services-section/derive-set-of-wallets";
+import { configRoot } from "@red-cup-engineering/key-management-computer-blockchain-system-engineering-services-section/keystore-paths";
 import { loadEndpoints, packageRoot } from "../src/tips.mjs";
 
 const require = createRequire(import.meta.url);
@@ -33,7 +33,7 @@ function parseWalletId(walletId) {
 }
 
 function defaultLoadRegistry() {
-  const registryPath = require.resolve("@red-cup-engineering/key-management-services-section/wallet-registry.json");
+  const registryPath = require.resolve("@red-cup-engineering/key-management-computer-blockchain-system-engineering-services-section/wallet-registry.json");
   return JSON.parse(readFileSync(registryPath, "utf8"));
 }
 

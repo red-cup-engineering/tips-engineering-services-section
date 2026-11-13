@@ -1,11 +1,11 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { validateJson } from "@red-cup-engineering/json-schema-services-section/validation";
+import { validateJson } from "@red-cup-engineering/json-schema-engineering-services-section/validation";
 import tipEndpointSchema from "../data/records/schema/tip-endpoint.schema.json" with { type: "json" };
 import { loadEndpoints } from "../src/tips.mjs";
 
 // json-schema-services-section does not yet recognize the "uri"/"date" string formats feeSchedule uses
-// (friction admitted 2026-09-05 against @red-cup-engineering/json-schema-services-section, unrelated to
+// (friction admitted 2026-09-05 against @red-cup-engineering/json-schema-engineering-services-section, unrelated to
 // this schema's walletId/receiver shape); every endpoint is validated with feeSchedule normalized
 // to "unknown" so this test exercises the shape this lot actually changed.
 function withoutFeeScheduleFormats(endpoint) {
