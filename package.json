@@ -7,9 +7,6 @@
     "type": "git",
     "url": "git+https://github.com/red-cup-engineering/tips-engineering-services-section.git"
   },
-  "scripts": {
-    "check": "for f in src/*.mjs scripts/*.mjs apps/*.mjs; do node --check \"$f\" || exit 1; done"
-  },
   "exports": {
     ".": "./src/tips.mjs",
     "./compute-tip-transaction": "./scripts/compute-tip-transaction.mjs",
@@ -32,10 +29,6 @@
     "@red-cup-engineering/node-js-function-engineering-services-section": "^0.5.1",
     "@red-cup-engineering/semantic-record-journal-service": "^0.6.2"
   },
-  "engines": {
-    "node": ">=24.2.0"
-  },
-  "sideEffects": false,
   "files": [
     "src",
     "scripts",
@@ -45,9 +38,5 @@
     "data/records/compute-tip-transaction-work-order.md",
     "README.md"
   ],
-  "license": "MIT",
-  "funding": {
-    "type": "individual",
-    "url": "https://github.com/561-group/.github/blob/main/TIPS.md"
-  }
+  "license": "MIT"
 }
