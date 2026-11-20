@@ -15,7 +15,7 @@ import { createRequire } from "node:module";
 import { readFileSync } from "node:fs";
 import { resolvePaymentReceiver } from "@red-cup-engineering/key-management-computer-blockchain-system-engineering-services-section/resolve-payment-receiver";
 import {
-  verifyEnvOnHost, verifyLocalEnvVariable, verifyLocalKeystoreFile, verifyRemoteKeystoreFileExistence, verifyWalletCustody,
+  verifyEnvOnHost, verifyLocalEnvVariable, verifyLocalKeystoreFile, verifyRemoteKeystoreFileExistence, verifyWalletStorage,
 } from "@red-cup-engineering/key-management-computer-blockchain-system-engineering-services-section/verify-set-of-wallet-custody";
 import { findEnvFilesToScan, findRepoRoot, readEnvVariablesFromFiles } from "@red-cup-engineering/key-management-computer-blockchain-system-engineering-services-section/derive-set-of-wallets";
 import { configRoot } from "@red-cup-engineering/key-management-computer-blockchain-system-engineering-services-section/keystore-paths";
@@ -54,7 +54,7 @@ export async function verifyStorageForWalletIds({ registry, walletIds }) {
   const backupRoot = process.env.KEY_BACKUP_ROOT;
   const checkoutRoot = findRepoRoot(packageRoot());
   const env = { ...readEnvVariablesFromFiles(findEnvFilesToScan({ checkoutRoot, houseConfigRoot: configRoot({}) })), ...process.env };
-  return verifyWalletCustody({
+  return verifyWalletStorage({
     registry: filteredRegistry,
     checkLocalKeystore: (wallet) => verifyLocalKeystoreFile(wallet, { passphrase, backupRoot }),
     checkRemoteKeystore: (wallet) => verifyRemoteKeystoreFileExistence(wallet),
