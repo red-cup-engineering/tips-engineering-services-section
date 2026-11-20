@@ -53,9 +53,9 @@ async function verifyCardClaim(endpoint, claim, options) {
   if (typeof claim?.stripeEventId !== "string" || claim.stripeEventId.length === 0) {
     return refuse("invalid-claim", "claim.stripeEventId is required for the card rail");
   }
-  const { createSemanticRecordJournal: createSemanticRecordLog } = await import("@red-cup-engineering/semantic-record-journal-service");
+  const { createSemanticRecordJournal } = await import("@red-cup-engineering/semantic-record-journal-service");
   const journal = options.stripeJournal
-    ?? createSemanticRecordLog({ root: options.stripeJournalRoot ?? stripePackageRoot(), objectKind: "stripe.payment-service-record" });
+    ?? createSemanticRecordJournal({ root: options.stripeJournalRoot ?? stripePackageRoot(), objectKind: "stripe.payment-service-record" });
   const rows = await journal.query({ category: "stripe-webhook-event-admission.events" });
   const record = rows.map((row) => row.record).find((row) => row.stripeEventId === claim.stripeEventId);
   if (!record) return refuse("not-found", "no ingested Stripe webhook event matches claim.stripeEventId");

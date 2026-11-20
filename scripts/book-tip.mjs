@@ -76,15 +76,15 @@ export function bookTip(receipt, options = {}) {
   const knownOpenText = (options.knownOpenPaths ?? []).filter(existsSync).map((path) => readFileSync(path, "utf8")).join("\n");
   const { directive } = computeTipTransaction({ receipt, openAccounts: [] });
 
-  const log = options.journal ?? createSemanticRecordJournal({ root: options.journalRoot ?? root, objectKind: TIP_BOOKING_OBJECT_KIND });
-  log.record({
+  const journal = options.journal ?? createSemanticRecordJournal({ root: options.journalRoot ?? root, objectKind: TIP_BOOKING_OBJECT_KIND });
+  journal.record({
     category: TIP_BOOKING_CATEGORY,
     recordedAt: (options.now ?? new Date()).toISOString(),
     record: { receiptId: receipt.receiptId, rail: receipt.rail, provider: receipt.provider, amount: receipt.amount, currency: receipt.currency, sidecarPath, directive, receipt },
     charge: { support: true, refutation: false },
   });
 
-  const bookings = log.query({ category: TIP_BOOKING_CATEGORY }).map((row) => row.record);
+  const bookings = journal.query({ category: TIP_BOOKING_CATEGORY }).map((row) => row.record);
   const { text, opened } = renderTipSidecar(bookings, date, { knownOpenText });
   mkdirSync(dirname(sidecarPath), { recursive: true });
   writeFileSync(sidecarPath, text);

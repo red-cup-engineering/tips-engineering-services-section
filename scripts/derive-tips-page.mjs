@@ -44,7 +44,7 @@ function defaultLoadRegistry() {
  * @param {{registry: {wallets: readonly object[]}, walletIds: readonly string[]}} input
  * @returns {Promise<object>} A CustodyVerification record.
  */
-export async function verifyStorageForWalletIds({ registry, walletIds }) {
+export async function verifyCustodyForWalletIds({ registry, walletIds }) {
   const identities = walletIds.map(parseWalletId);
   const filteredRegistry = {
     ...registry,
@@ -94,15 +94,15 @@ export async function deriveTipsPage(endpoints = loadEndpoints(), options = {}) 
 
   const walletBacked = listed.filter((endpoint) => endpoint.walletId);
   const resolvedAddressByWalletId = new Map();
-  const rejections = [];
+  const refusals = [];
   if (walletBacked.length > 0) {
     const loadRegistry = options.loadRegistry ?? defaultLoadRegistry;
-    const verifyStorage = options.verifyCustody ?? verifyStorageForWalletIds;
+    const verifyCustody = options.verifyCustody ?? verifyCustodyForWalletIds;
     const registry = loadRegistry();
-    const storageVerification = await verifyStorage({ registry, walletIds: walletBacked.map((endpoint) => endpoint.walletId) });
+    const custodyVerification = await verifyCustody({ registry, walletIds: walletBacked.map((endpoint) => endpoint.walletId) });
     for (const endpoint of walletBacked) {
-      const result = resolvePaymentReceiver({ walletId: endpoint.walletId, rail: endpoint.rail, registry, custodyVerification: storageVerification });
-      if (result.refused) rejections.push(result);
+      const result = resolvePaymentReceiver({ walletId: endpoint.walletId, rail: endpoint.rail, registry, custodyVerification });
+      if (result.refused) refusals.push(result);
       else resolvedAddressByWalletId.set(endpoint.walletId, result.address);
     }
   }
@@ -119,7 +119,7 @@ export async function deriveTipsPage(endpoints = loadEndpoints(), options = {}) 
     type: "TipsPageFragment",
     markdown: `${lines.join("\n")}\n`,
     handsItems: pending.map(({ id, provider, handsItem }) => ({ id, provider, handsItem })),
-    refusals: rejections,
+    refusals,
     endpoints: rendered.map((endpoint) => ({ ...endpoint, receiver: endpoint.walletId ? resolvedAddressByWalletId.get(endpoint.walletId) : null })),
   };
 }
