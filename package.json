@@ -1,0 +1,42 @@
+{
+  "name": "@red-cup-engineering/tips-engineering-services-section",
+  "version": "0.2.6-dev.0",
+  "type": "module",
+  "description": "Tips through as many endpoints as possible (2026-09-05 ruling, accept-tips-through-every-endpoint): a catalog of tip endpoints across card, hive, base-usdc, lightning, and platform rails, each naming a walletId resolved through key-management-services-section's WalletRegistry rather than a literal receiver (2026-09-05 ruling, payment-receivers-are-parameters-never-literals); verification of a claimed receipt; and booking a verified tip as a balanced Beancount transaction.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/red-cup-engineering/tips-engineering-services-section.git"
+  },
+  "exports": {
+    ".": "./src/tips.mjs",
+    "./compute-tip-transaction": "./scripts/compute-tip-transaction.mjs",
+    "./verify-tip-receipt": "./scripts/verify-tip-receipt.mjs",
+    "./book-tip": "./scripts/book-tip.mjs",
+    "./derive-tips-page": "./scripts/derive-tips-page.mjs",
+    "./tips-cli": "./apps/tips-cli.mjs",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "tips-cli": "apps/tips-cli.mjs"
+  },
+  "dependencies": {
+    "@red-cup-engineering/exact-number-codec": "^0.1.0",
+    "@red-cup-engineering/computer-data-engineering-services-section": "^0.7.4",
+    "@red-cup-engineering/json-schema-engineering-services-section": "^0.5.7",
+    "@red-cup-engineering/key-management-computer-blockchain-system-engineering-services-section": "^0.5.6",
+    "@red-cup-engineering/stripe-engineering-services-section": "^0.2.2",
+    "@red-cup-engineering/x402-engineering-services-section": "^0.14.1",
+    "@red-cup-engineering/node-js-function-engineering-services-section": "^0.5.1",
+    "@red-cup-engineering/semantic-record-journal-service": "^0.6.2"
+  },
+  "files": [
+    "src",
+    "scripts",
+    "apps",
+    "data/records/schema",
+    "data/records/2026-09-05-tip-endpoints.json",
+    "data/records/compute-tip-transaction-work-order.md",
+    "README.md"
+  ],
+  "license": "MIT"
+}
