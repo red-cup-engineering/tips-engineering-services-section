@@ -33,7 +33,7 @@
     "src",
     "scripts",
     "apps",
-    "data/records/schema",
+    "data/records/schemas",
     "data/records/2026-09-05-tip-endpoints.json",
     "data/records/compute-tip-transaction-work-order.md",
     "README.md"

@@ -13,7 +13,7 @@ Tips should be accepted through as many endpoints as possible. They are the pass
 
 This section holds:
 
-- `data/records/schema/tip-endpoint.schema.json` and the dated catalog
+- `data/records/schemas/tip-endpoint.schema.json` and the dated catalog
   `data/records/2026-09-05-tip-endpoints.json` — every endpoint the org can receive a tip
   through today, one row each (`id`, `rail`, `provider`, `walletId`, `state`,
   `verificationOperation`, `bookingAccount`, `feeSchedule`, `handsItem`). `walletId` is a
